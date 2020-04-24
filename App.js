@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler'
-import React from 'react';
+import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import {  View } from 'react-native'
 import { Provider } from 'react-redux'
@@ -9,7 +9,7 @@ import { createStore } from 'redux'
 import { black } from './utils/colors'
 import Constants from 'expo-constants'
 import { StatusBar } from 'react-native'
-import MainNav from './components/MainNav';
+import MainNav from './components/MainNav'
 
 
 const store = createStore(reducer, middleware)

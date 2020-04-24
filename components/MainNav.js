@@ -1,13 +1,16 @@
 import 'react-native-gesture-handler'
-import React from 'react';
+import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import DecksList from './DecksList'
 import AddDeck from './AddDeck'
 import { black, white } from '../utils/colors'
+import {createStackNavigator} from '@react-navigation/stack'
+import DeckDetails from './DeckDetails'
 
 const Tabs = createMaterialTopTabNavigator()
+const Stack = createStackNavigator();
 
-const MainNav = () => (
+const TabNav = () => (
     <Tabs.Navigator
         initialRouteName="Decks"
         tabBarOptions={{
@@ -30,6 +33,20 @@ const MainNav = () => (
         <Tabs.Screen name="Decks" component={DecksList}/>
         <Tabs.Screen name="Add Deck" component={AddDeck}/>
     </Tabs.Navigator>
-  );
-
+  )
+  const MainNav = () => (
+      <Stack.Navigator headerMode="screen">
+          <Stack.Screen
+              name="Home"
+              component={TabNav}
+              options={{headerShown: false}}/>
+        <Stack.Screen
+          name="EntryDetail"
+          component={DeckDetails}
+          options={{
+              headerTintColor: white
+          }}/>
+      </Stack.Navigator>
+  )
+  
   export default MainNav

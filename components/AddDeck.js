@@ -4,6 +4,7 @@ import {black} from '../utils/colors'
 import { connect } from 'react-redux'
 import { saveDeckTitle } from '../utils/api';
 import {addDeck} from '../actions'
+import {CommonActions} from '@react-navigation/native';
 
 class AddDeck extends Component{
     state = {
@@ -19,9 +20,16 @@ class AddDeck extends Component{
           }
         }
         dispatch(addDeck(deck))
-        //navigate to added deck
+        this.toHome()
         this.setState({ title: '' }); 
     }
+    toHome = () => {
+      this.props.navigation.dispatch(
+          CommonActions.goBack({
+              key: 'DecksList',
+          }))
+        }
+    
     render(){
         return(
             <View style={styles.container}>
