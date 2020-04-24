@@ -1,14 +1,16 @@
-import React from 'react'
+import 'react-native-gesture-handler'
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native'
 import {  View } from 'react-native'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 import middleware from './middleware'
 import { createStore } from 'redux'
-import DecksList from './components/DecksList'
 import { black } from './utils/colors'
 import Constants from 'expo-constants'
 import { StatusBar } from 'react-native'
-import AddDeck from './components/AddDeck'
+import MainNav from './components/MainNav';
+
 
 const store = createStore(reducer, middleware)
 
@@ -19,13 +21,16 @@ function UdaciStatusBar ({backgroundColor, ...props}) {
     </View>
   )
 }
+
 export default class App extends React.Component  {
   render(){
     return (
       <Provider store={store}>
       <View style={{flex:1}}>
       <UdaciStatusBar backgroundColor={black} barStyle="light-content"/>
-        <AddDeck />
+      <NavigationContainer>
+        <MainNav />
+      </NavigationContainer>
       </View>
       </Provider>
     )
