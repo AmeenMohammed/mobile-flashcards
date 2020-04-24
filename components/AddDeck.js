@@ -1,9 +1,26 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, TextInput, Button } from 'react-native'
 import {black} from '../utils/colors'
+import { connect } from 'react-redux'
+import { saveDeckTitle } from '../utils/api';
+import {addDeck} from '../actions'
+
 class AddDeck extends Component{
     state = {
         title:''
+    }
+    AddNewDeck = () => {
+      const { dispatch } = this.props
+        saveDeckTitle(this.state.title)
+        const deck = {
+          [this.state.title]: {
+            title: this.state.title,
+            questions: []
+          }
+        }
+        dispatch(addDeck(deck))
+        //navigate to added deck
+        this.setState({ title: '' }); 
     }
     render(){
         return(
@@ -15,8 +32,11 @@ class AddDeck extends Component{
               value={this.state.title}
               onFocus={() => this.setState({ title: ''})}
             />
-              <Button title="Add Deck"
-                     color={black}/>
+              <Button 
+                    title="Add Deck"
+                    onPress={this.AddNewDeck}
+                    color={black}
+                    />
           </View>
         )
     }
@@ -35,4 +55,4 @@ const styles = StyleSheet.create({
     },
 
   });
-export default AddDeck
+export default connect()(AddDeck)

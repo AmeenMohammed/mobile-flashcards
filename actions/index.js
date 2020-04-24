@@ -1,6 +1,7 @@
 import { getDecks } from '../utils/api'
 
 export const GET_DECKS = 'GET_DECKS'
+export const ADD_DECK = 'ADD_DECK'
 
 export function getAllDecks() {
   return (dispatch) => {
@@ -11,5 +12,12 @@ export function getAllDecks() {
           decks
         })
       })
+  }
+}
+
+export function addDeck(deck) {
+  return {
+    type: ADD_DECK,
+    deck
   }
 }
