@@ -8,6 +8,7 @@ import DecksList from './components/DecksList'
 import { black } from './utils/colors'
 import Constants from 'expo-constants'
 import { StatusBar } from 'react-native'
+import AddDeck from './components/AddDeck'
 
 const store = createStore(reducer, middleware)
 
@@ -24,7 +25,7 @@ export default class App extends React.Component  {
       <Provider store={store}>
       <View style={{flex:1}}>
       <UdaciStatusBar backgroundColor={black} barStyle="light-content"/>
-        <DecksList />
+        <AddDeck />
       </View>
       </Provider>
     )
