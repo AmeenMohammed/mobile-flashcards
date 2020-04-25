@@ -8,6 +8,7 @@ import {
 import {CommonActions} from '@react-navigation/native'
 import { connect } from 'react-redux'
 import { white, black } from '../utils/colors'
+import { setLocalNotification, clearLocalNotification } from '../utils/helpers'
 
 const NoCards = () => (
   <View style={styles.noCards}>
@@ -72,6 +73,8 @@ class Quiz extends Component {
       show: 'question',
       showResults: false
     })
+    clearLocalNotification()
+    .then(setLocalNotification)   
   }
 
   goBack = () => {
