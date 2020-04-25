@@ -1,17 +1,22 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TextInput, Button } from 'react-native'
-import {black} from '../utils/colors'
+import { View, StyleSheet, TextInput, Button, Text } from 'react-native'
+import {black, red} from '../utils/colors'
 import { connect } from 'react-redux'
 import { saveDeckTitle } from '../utils/api';
 import {addDeck} from '../actions'
-import {CommonActions} from '@react-navigation/native';
 
 class AddDeck extends Component{
     state = {
-        title:''
+        title:'',
+        error:false
     }
     AddNewDeck = () => {
       const { dispatch } = this.props
+      if(this.state.title === '' || this.state.title.length < 3){
+        this.setState({
+          error:true
+        })
+      }else{
         saveDeckTitle(this.state.title)
         const deck = {
           [this.state.title]: {
@@ -20,19 +25,22 @@ class AddDeck extends Component{
           }
         }
         dispatch(addDeck(deck))
-        this.toHome()
-        this.setState({ title: '' }); 
+        this.toDeck(this.state.title)
+        this.setState({ title: '', error:'' }); 
+      }
     }
-    toHome = () => {
-      this.props.navigation.dispatch(
-          CommonActions.goBack({
-              key: 'DecksList',
-          }))
-        }
+    toDeck = (title) => {
+      this.props.navigation.navigate(
+         'DeckDetails',
+         {title: title}
+         )
+       }
     
     render(){
+      const { error } = this.state
         return(
             <View style={styles.container}>
+            {error === true &&<Text style={styles.error}>Enter A deck name at least 3 digits!</Text>}
             <TextInput
               placeholder="Enter Deck Name"
               style={styles.titleInput}
@@ -61,6 +69,11 @@ const styles = StyleSheet.create({
       marginBottom: 10,
       fontSize: 17
     },
+    error: {
+      fontWeight: 'bold',
+      textAlign: 'center',
+      color: red
+    }
 
   });
 export default connect()(AddDeck)
