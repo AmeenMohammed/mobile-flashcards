@@ -1,4 +1,4 @@
-import { GET_DECKS, ADD_DECK } from '../actions'
+import { GET_DECKS, ADD_DECK, ADD_CARD } from '../actions'
 
 export default function deckReducer(state = {}, action) {
   switch(action.type) {
@@ -11,7 +11,14 @@ export default function deckReducer(state = {}, action) {
       return{
         ...state,
         ...action.deck
-      }    
+      } 
+    case ADD_CARD:
+      const updatedDeck = state[action.deck]
+      updatedDeck.questions.push(action.card)
+      return {
+        ...state,
+        [action.deck]: updatedDeck
+        }     
     default:
       return state
   }

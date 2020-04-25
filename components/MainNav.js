@@ -6,6 +6,7 @@ import AddDeck from './AddDeck'
 import { black, white } from '../utils/colors'
 import {createStackNavigator} from '@react-navigation/stack'
 import DeckDetails from './DeckDetails'
+import AddCard from './AddCard'
 
 const Tabs = createMaterialTopTabNavigator()
 const Stack = createStackNavigator();
@@ -51,6 +52,17 @@ const TabNav = () => (
                 },        
             }) }
 
+          />
+        <Stack.Screen
+          name="AddCard"
+          component={AddCard}
+          options={{
+              title:"Add Card",
+            headerTintColor: white,
+            headerStyle:{
+                backgroundColor:black,
+                },        
+          }}
           />
       </Stack.Navigator>
   )

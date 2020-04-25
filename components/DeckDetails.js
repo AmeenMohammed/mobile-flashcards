@@ -4,6 +4,13 @@ import { connect } from 'react-redux'
 import { black, white } from '../utils/colors';
 
 class DeckDetails extends Component{
+  navigateToAddCard = (e, title)=>{
+    e.preventDefault()
+    this.props.navigation.navigate(
+      'AddCard',
+      {title:title}
+      )
+  }
     render(){
         return(
             <View style={styles.deckCard}>
@@ -17,6 +24,7 @@ class DeckDetails extends Component{
                 color={black}
                 />
               <Button  
+                onPress={(e) => this.navigateToAddCard(e, this.props.deck.title)}
                 title="Add Card"
                 color={black}
               />
