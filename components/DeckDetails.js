@@ -11,6 +11,13 @@ class DeckDetails extends Component{
       {title:title}
       )
   }
+  navigateToQuiz = (e, title)=>{
+    e.preventDefault()
+    this.props.navigation.navigate(
+      'Quiz',
+      {title:title}
+      )
+  }
     render(){
         return(
             <View style={styles.deckCard}>
@@ -20,6 +27,7 @@ class DeckDetails extends Component{
             </View>
             <View>
               <Button 
+                onPress={(e) => this.navigateToQuiz(e, this.props.deck.title)}
                 title="Start Quiz"
                 color={black}
                 />

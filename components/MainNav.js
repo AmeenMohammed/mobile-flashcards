@@ -7,6 +7,7 @@ import { black, white } from '../utils/colors'
 import {createStackNavigator} from '@react-navigation/stack'
 import DeckDetails from './DeckDetails'
 import AddCard from './AddCard'
+import Quiz from './Quiz'
 
 const Tabs = createMaterialTopTabNavigator()
 const Stack = createStackNavigator();
@@ -64,6 +65,18 @@ const TabNav = () => (
                 },        
           }}
           />
+         <Stack.Screen
+          name="Quiz"
+          component={Quiz}
+          options={({ route }) => ({ 
+            title: route.params.title,
+            headerTintColor: white,
+            headerStyle:{
+                backgroundColor:black,
+                },        
+            }) }
+
+          /> 
       </Stack.Navigator>
   )
 export default MainNav
