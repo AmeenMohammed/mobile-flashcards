@@ -1,5 +1,5 @@
 import React, { Component} from 'react' 
-import { Text, FlatList, StyleSheet, View  } from 'react-native'
+import { Text, FlatList, StyleSheet, View, TouchableWithoutFeedback} from 'react-native'
 import { getAllDecks } from '../actions'
 import { connect } from 'react-redux'
 import { white, black, gray} from '../utils/colors'
@@ -9,6 +9,17 @@ class DecksList extends Component{
         const {dispatch} = this.props
         dispatch(getAllDecks())
     }
+    navigateToDeck = (e, title) =>{
+      e.preventDefault()
+      this.toDeck(title)
+    }
+    toDeck = (title) => {
+     this.props.navigation.navigate(
+        'DeckDetails',
+        {title: title}
+        )
+      }
+    
     render(){
         return(
             <FlatList 
@@ -16,10 +27,14 @@ class DecksList extends Component{
             data={Object.values(this.props.decks)}
             keyExtractor={(item)=>item.title}
             renderItem={({ item }) => (
+            <TouchableWithoutFeedback
+              onPress={(e) => this.navigateToDeck(e, item.title)}
+            >
             <View style={styles.deckItem}>
                 <Text style={styles.deckTitle}>{item.title}</Text>
                 <Text style={styles.cardNumber}>Cards: {item.questions.length}</Text>
               </View>
+              </TouchableWithoutFeedback>
             )}
           />
         )

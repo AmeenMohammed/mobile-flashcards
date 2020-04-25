@@ -41,12 +41,17 @@ const TabNav = () => (
               component={TabNav}
               options={{headerShown: false}}/>
         <Stack.Screen
-          name="EntryDetail"
+          name="DeckDetails"
           component={DeckDetails}
-          options={{
-              headerTintColor: white
-          }}/>
+          options={({ route }) => ({ 
+            title: route.params.title,
+            headerTintColor: white,
+            headerStyle:{
+                backgroundColor:black,
+                },        
+            }) }
+
+          />
       </Stack.Navigator>
   )
-  
-  export default MainNav
+export default MainNav
